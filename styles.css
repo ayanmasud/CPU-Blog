@@ -58,3 +58,30 @@ body {
   margin: 0;
   white-space: nowrap;
 }
+
+footer.info-section {
+  background-color: #222;
+  color: #eee;
+  padding: 30px 20px;
+  margin-top: 40px;
+  text-align: center;
+  border-top: 2px solid #ccc;
+}
+
+footer.info-section h3 {
+  margin-top: 0;
+  font-size: 1.5em;
+}
+
+footer.info-section .contact {
+  margin: 20px 0;
+}
+
+footer.info-section a {
+  color: #66b2ff;
+  text-decoration: none;
+}
+
+footer.info-section a:hover {
+  text-decoration: underline;
+}
