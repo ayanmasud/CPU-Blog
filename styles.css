@@ -40,6 +40,7 @@ body {
   background-color: #222;
   color: #eee;
   padding: 30px 20px;
+  text-align: center;
   border-bottom: 2px solid #ccc;
 }
 
@@ -52,16 +53,7 @@ body {
 .blog-header .authors {
   font-size: 1em;
   color: #ccc;
-  margin: 5px 0 0 0;
-  text-align: right;
-}
-
-@media (min-width: 600px) {
-  .blog-header {
-    display: flex;
-    justify-content: space-between;
-    align-items: flex-end;
-  }
+  margin-top: 10px;
 }
 
 footer.info-section {
