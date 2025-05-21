@@ -37,23 +37,25 @@ body {
 }
 
 .blog-header {
+  background-color: #222;
+  color: #eee;
   display: flex;
   justify-content: space-between;
   align-items: flex-end;
   margin-bottom: 40px;
+  padding: 30px 20px 20px 20px;
   border-bottom: 2px solid #ccc;
-  padding-bottom: 10px;
 }
 
 .blog-header h1 {
   font-size: 2em;
   margin: 0;
-  color: #333;
+  color: #eee;
 }
 
 .blog-header .authors {
   font-size: 1em;
-  color: #555;
+  color: #ccc;
   text-align: right;
   margin: 0;
   white-space: nowrap;
