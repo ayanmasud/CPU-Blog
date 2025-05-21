@@ -73,8 +73,21 @@ footer.info-section h3 {
   font-size: 1.5em;
 }
 
+footer.info-section .contact-container {
+  display: flex;
+  justify-content: space-around;
+  flex-wrap: wrap;
+  margin-top: 20px;
+}
+
 footer.info-section .contact {
-  margin: 20px 0;
+  width: 300px;
+  text-align: left;
+}
+
+footer.info-section .contact h4 {
+  margin-bottom: 10px;
+  font-size: 1.2em;
 }
 
 footer.info-section a {
