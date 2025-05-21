@@ -76,12 +76,13 @@ footer.info-section h3 {
 footer.info-section .contact-container {
   display: flex;
   justify-content: space-around;
+  gap: 40px;
   flex-wrap: wrap;
   margin-top: 20px;
 }
 
 footer.info-section .contact {
-  width: 300px;
+  width: 350px;
   text-align: left;
 }
 
