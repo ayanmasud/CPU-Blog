@@ -17,7 +17,7 @@
       max-width: 800px;
       margin: 0 auto;
       padding: 20px;
-      position: relative; /* Added for positioning the button */
+      position: relative;
     }
     .entry {
       background-color: white;
@@ -39,8 +39,7 @@
       font-size: 0.9em;
       margin-bottom: 10px;
     }
-    /* New styles for the dynamically added button */
-    #jumpToEntryBtn {
+    #jumpToFirstEntryBtn {
       position: absolute;
       right: 20px;
       top: 20px;
@@ -53,7 +52,7 @@
       font-family: 'Nunito', sans-serif;
       z-index: 10;
     }
-    #jumpToEntryBtn:hover {
+    #jumpToFirstEntryBtn:hover {
       background-color: #444;
     }
   </style>
@@ -65,7 +64,7 @@
   </header>
   
   <div class="container">
-    <div class="entry" id="first-entry">
+    <div class="entry">
       <div class="date">May 21, 2025</div>
       <h2>The FPGA development board</h2>
       <p>
@@ -92,7 +91,7 @@
       </p>
     </div>
     
-    <div class="entry" id="last-entry">
+    <div class="entry" id="first-entry">
       <div class="date">May 17, 2025</div>
       <h2>Creation of the Blog</h2>
       <p>
@@ -126,34 +125,20 @@
   <script>
     document.addEventListener('DOMContentLoaded', function() {
       const firstEntry = document.getElementById('first-entry');
-      const lastEntry = document.getElementById('last-entry');
       
-      if (firstEntry && lastEntry) {
+      if (firstEntry) {
         // Create the button element
         const jumpButton = document.createElement('button');
-        jumpButton.id = 'jumpToEntryBtn';
+        jumpButton.id = 'jumpToFirstEntryBtn';
         jumpButton.textContent = 'Jump to First Entry';
         
-        // Track which entry we're currently showing
-        let showingFirstEntry = true;
-        
-        // Add click event to toggle between entries
+        // Add click event to scroll to first entry
         jumpButton.addEventListener('click', function() {
-          if (showingFirstEntry) {
-            // Scroll to last entry
-            lastEntry.scrollIntoView({ behavior: 'smooth' });
-            jumpButton.textContent = 'Jump to First Entry';
-          } else {
-            // Scroll to first entry
-            firstEntry.scrollIntoView({ behavior: 'smooth' });
-            jumpButton.textContent = 'Jump to Last Entry';
-          }
-          showingFirstEntry = !showingFirstEntry;
+          firstEntry.scrollIntoView({ behavior: 'smooth' });
         });
         
         // Position the button
         const container = document.querySelector('.container');
-        container.style.position = 'relative';
         container.appendChild(jumpButton);
       }
     });
