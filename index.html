@@ -40,7 +40,7 @@
       margin-bottom: 10px;
     }
     /* New styles for the dynamically added button */
-    #jumpToBottomBtn {
+    #jumpToEntryBtn {
       position: absolute;
       right: 20px;
       top: 20px;
@@ -53,7 +53,7 @@
       font-family: 'Nunito', sans-serif;
       z-index: 10;
     }
-    #jumpToBottomBtn:hover {
+    #jumpToEntryBtn:hover {
       background-color: #444;
     }
   </style>
@@ -65,7 +65,7 @@
   </header>
   
   <div class="container">
-    <div class="entry">
+    <div class="entry" id="first-entry">
       <div class="date">May 21, 2025</div>
       <h2>The FPGA development board</h2>
       <p>
@@ -92,7 +92,7 @@
       </p>
     </div>
     
-    <div class="entry">
+    <div class="entry" id="last-entry">
       <div class="date">May 17, 2025</div>
       <h2>Creation of the Blog</h2>
       <p>
@@ -124,29 +124,35 @@
   </footer>
 
   <script>
-    // Wait for the DOM to be fully loaded
     document.addEventListener('DOMContentLoaded', function() {
-      // Create the button element
-      const jumpButton = document.createElement('button');
-      jumpButton.id = 'jumpToBottomBtn';
-      jumpButton.textContent = 'Jump to Bottom';
+      const firstEntry = document.getElementById('first-entry');
+      const lastEntry = document.getElementById('last-entry');
       
-      // Add click event to scroll to bottom
-      jumpButton.addEventListener('click', function() {
-        window.scrollTo({
-          top: document.body.scrollHeight,
-          behavior: 'smooth'
-        });
-      });
-      
-      // Find the first entry and position the button relative to it
-      const firstEntry = document.querySelector('.entry');
-      if (firstEntry) {
-        // Get the position of the first entry
-        const entryRect = firstEntry.getBoundingClientRect();
-        const container = document.querySelector('.container');
+      if (firstEntry && lastEntry) {
+        // Create the button element
+        const jumpButton = document.createElement('button');
+        jumpButton.id = 'jumpToEntryBtn';
+        jumpButton.textContent = 'Jump to First Entry';
         
-        // Position the button absolutely within the container
+        // Track which entry we're currently showing
+        let showingFirstEntry = true;
+        
+        // Add click event to toggle between entries
+        jumpButton.addEventListener('click', function() {
+          if (showingFirstEntry) {
+            // Scroll to last entry
+            lastEntry.scrollIntoView({ behavior: 'smooth' });
+            jumpButton.textContent = 'Jump to First Entry';
+          } else {
+            // Scroll to first entry
+            firstEntry.scrollIntoView({ behavior: 'smooth' });
+            jumpButton.textContent = 'Jump to Last Entry';
+          }
+          showingFirstEntry = !showingFirstEntry;
+        });
+        
+        // Position the button
+        const container = document.querySelector('.container');
         container.style.position = 'relative';
         container.appendChild(jumpButton);
       }
