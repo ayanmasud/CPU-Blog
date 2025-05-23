@@ -17,6 +17,7 @@
       max-width: 800px;
       margin: 0 auto;
       padding: 20px;
+      position: relative; /* Added for positioning the button */
     }
     .entry {
       background-color: white;
@@ -38,6 +39,23 @@
       font-size: 0.9em;
       margin-bottom: 10px;
     }
+    /* New styles for the dynamically added button */
+    #jumpToBottomBtn {
+      position: absolute;
+      right: 20px;
+      top: 20px;
+      background-color: #222;
+      color: white;
+      border: none;
+      padding: 5px 10px;
+      border-radius: 5px;
+      cursor: pointer;
+      font-family: 'Nunito', sans-serif;
+      z-index: 10;
+    }
+    #jumpToBottomBtn:hover {
+      background-color: #444;
+    }
   </style>
 </head>
 <body>
@@ -47,20 +65,6 @@
   </header>
   
   <div class="container">
-    <div class="entry">
-      <div class="date">May 17, 2025</div>
-      <h2>Creation of the Blog</h2>
-      <p>
-        During the summer of 2025, Ehan Masud and Ayan Masud plan on creating an 8-bit CPU. 
-      </p>
-      <p>
-        We created this blog to log the progress we make, reflect on challenges we face, and share what we learn along the way. Documenting what we do helps us stay organized, and may help other students attempting similar projects.
-      </p>
-      <p>
-        Whether we succeed or run into errors, this blog will serve as both a technical journal and a means to connect with people interested in computer architecture and DIY electronics.
-      </p>
-    </div>
-
     <div class="entry">
       <div class="date">May 21, 2025</div>
       <h2>The FPGA development board</h2>
@@ -84,10 +88,23 @@
         </li>
       </ul>
       <p>
-        The program that we will be using to program this FPGA board is the Xilinx Vivado Design Suite. There is a free version called "The Vivado Standard Edition" which fully supports the Basys 3 Artix-7 board.
+        The software that we will be using to program this FPGA board is the "Vivado Standard Edition 2024.2" which fully supports the Basys 3 Artix-7 board.
       </p>
     </div>
-
+    
+    <div class="entry">
+      <div class="date">May 17, 2025</div>
+      <h2>Creation of the Blog</h2>
+      <p>
+        During the summer of 2025, Ehan Masud and Ayan Masud plan on creating an 8-bit CPU. 
+      </p>
+      <p>
+        We created this blog to log the progress we make, reflect on challenges we face, and share what we learn along the way. Documenting what we do helps us stay organized, and may help other students attempting similar projects.
+      </p>
+      <p>
+        Whether we succeed or run into errors, this blog will serve as both a technical journal and a means to connect with people interested in computer architecture and DIY electronics.
+      </p>
+    </div>
   </div>
   
   <footer class="info-section">
@@ -105,5 +122,35 @@
       </div>
     </div>
   </footer>
+
+  <script>
+    // Wait for the DOM to be fully loaded
+    document.addEventListener('DOMContentLoaded', function() {
+      // Create the button element
+      const jumpButton = document.createElement('button');
+      jumpButton.id = 'jumpToBottomBtn';
+      jumpButton.textContent = 'Jump to Bottom';
+      
+      // Add click event to scroll to bottom
+      jumpButton.addEventListener('click', function() {
+        window.scrollTo({
+          top: document.body.scrollHeight,
+          behavior: 'smooth'
+        });
+      });
+      
+      // Find the first entry and position the button relative to it
+      const firstEntry = document.querySelector('.entry');
+      if (firstEntry) {
+        // Get the position of the first entry
+        const entryRect = firstEntry.getBoundingClientRect();
+        const container = document.querySelector('.container');
+        
+        // Position the button absolutely within the container
+        container.style.position = 'relative';
+        container.appendChild(jumpButton);
+      }
+    });
+  </script>
 </body>
 </html>
