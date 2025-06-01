@@ -64,6 +64,27 @@
   </header>
 
   <div class="container">
+
+    <div class="entry">
+      <div class="date">May 31, 2025</div>
+      <h2>Project 1: 8-Bit Counter</h2>
+      <p>
+        We began learning how to program the Basys 3 in Verilog with Vivado. While Vivado serves as an excellent IDE to both generate bitstreams, resolve syntax errors, and program the Basys 3, it is a sizable application. We aim to discover and understand its many applications in the following projects.
+      </p>
+      <p>
+        Our first goal was to create a simple 8-bit counter. For this project, the Basys 3 would count in binary by using the built-in LEDs, on for 1 and off for 0. Below is our completed project:
+      </p>
+      <img src="images/8bitcounter.gif" alt="8 bit counter gif">
+      <p>
+        <b>Hurdles</b><br />Prior to completing the 8 bit counter, we were having difficulties with both hardware and software. Below, we detail the obstacles we faced and how we addressed them.
+      </p>
+      <ul>
+        <li>Unable to program device<br />One of our initial obstacles when beginning our project was being unable to program the Basys 3. We generated a bitstream without issue, our code had no syntax errors, but Vivado was simply unable to find a hardware target (the Basys 3), even when plugged in. However, through the Windows Device Manager, we were able to determine that the Basys 3 was not recognized under the Universal Serial Bus controllers. This was found to be true for other devices that were connected with the cable. So our issue lied in the cable itself, which did not support data transfer. Switching to a USB cable that did support data transfer solved this issue.</li>
+        <li>Clock not functioning concerns<br />In order to have the 8 bit counter work in real time, we needed the leds to update in intervals. With our first 8 bit counter code not updating on the board, we believed that there may have been some internal problems with the FPGAs oscillator. Just to make sure, we broke our code down into parts and checked the functionality of the clock by making a simple led blink. Through trial and error, we eventually realized that the clock was working just fine, it was only a problem in our code that we had to work around. In our first iteration, we assigned “output reg” for our leds. In our final iteration, we separated it into “output” for the leds, and “reg” for a separate variable that would store the count, and then in the end, we would set led to equal that count. Through this method, we were able to see the led blinking, thus making sure the clock was working.</li>
+      </ul>
+      <img src="images/clkledtesting.gif" alt="clock testing with led gif">
+    </div>
+    
     <div class="entry">
       <div class="date">May 23, 2025</div>
       <h2>AMD Vivado Design Suite</h2>
