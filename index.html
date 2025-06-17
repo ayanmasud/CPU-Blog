@@ -60,14 +60,40 @@
 <body>
   <header class="blog-header">
     <h1>8-Bit CPU Build Blog</h1>
-    <p class="authors">by Ehan Masud & Ayan Masud</p>
+    <p class="authors">by Ehan Masud & Ayan Masud<br /><a href="github.com/ayanmasud/FPGA-Projects.git" target="_blank">Github</a></p>
   </header>
 
   <div class="container">
 
     <div class="entry">
+      <div class="date">June 13, 2025</div>
+      <h2>Project 1: Register File</h2>
+      <p>
+        This week, we finalized a schedule to ensure that we complete the entirety of the CPU by July 31st. We have also decided that we will be creating it with the Von Neumann architecture, meaning our program instructions and data will be stored in the same memory. The Von Neumann architecture is used more commonly in general-purpose computers which is why we chose it.
+      </p>
+      <p>
+        The first component that we will be creating for our CPU is the register file which is a collection of registers, which are small, fast memory storage units.
+      </p>
+      <p>
+        Since this module is the first part of our CPU, we have set the inputs and outputs to be placeholders for when we combine all the modules together in Vivado. For now, we set it so that you can select which of the 8 registers you want to update by changing the 3 far right switches on the FPGA board. Since 2^3 = 8, this creates a total of 8 combinations for 8 different registers. You can select which register you want to write to by pressing button BTNU on the board.
+      </p>
+      <p>
+        You can use the switches, SW7-SW0, to create an 8 bits of data for the register selected (on -> 1. off -> 0). You can then press button BTNC to write that data into the selected register.
+      </p>
+      <p>
+        To read what each register’s data holds, we set it to always display the data onto the on-board LEDs. You can cycle through the registers within the register file by pressing button BTNL to see what data each of the eight registers hold.
+      </p>
+      <p>
+        Of course, all of these manual instructions won’t exist on our final CPU. These are just to serve the purpose of testing whether the code does what we want, and act as placeholders for when we complete the other modules that connect to the register file.
+      </p>
+      <p>
+        The main takeaways we took from this project was more foundational skills in Verilog, including an understanding of how top modules function, acting as a central point for connecting submodules. By committing to a Von Neumann architecture and ensuring our code will be compatible with future submodules, we developed a stronger grasp of CPU design.
+      </p>
+    </div>
+    
+    <div class="entry">
       <div class="date">May 31, 2025</div>
-      <h2>Project 1: 8-Bit Counter</h2>
+      <h2>Pre-Project: 8-Bit Counter</h2>
       <p>
         We began learning how to program the Basys 3 in Verilog with Vivado. While Vivado serves as an excellent IDE to both generate bitstreams, resolve syntax errors, and program the Basys 3, it is a sizable application. We aim to discover and understand its many applications in the following projects.
       </p>
