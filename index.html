@@ -66,6 +66,62 @@
   <div class="container">
 
     <div class="entry">
+      <div class="date">June 30, 2025</div>
+      <h2>Project 2: Arithmetic Logic Unit</h2>
+      <p>
+        Unfortunately, we have already gone behind schedule due to the many things that we've been busy with. Fortunately, we have just finished creating the ALU for our CPU. This is the core component that performs calculations and logical operations within a computer.
+      </p>
+      
+      <p>
+        Below is our completed project:
+      </p>
+      
+      <!-- Video Embed Container -->
+      <div class="video-container">
+        <iframe width="560" height="315" src="https://www.youtube.com/embed/YOUR_VIDEO_ID_HERE" 
+                frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" 
+                allowfullscreen></iframe>
+      </div>
+      
+      <p>
+        The ALU is the "calculator" of the CPU. Our's supports four fundamental operations:
+      </p>
+      <ol>
+        <li>Addition - Adds two 8-bit numbers</li>
+        <li>Subtraction - Subtracts two 8-bit numbers (using two's complement)</li>
+        <li>Bitwise AND - Logical AND between bits</li>
+        <li>Bitwise OR - Logical OR between bits</li>
+      </ol>
+      <p>
+        It also generates two status flags:
+      </p>
+      <ol>
+        <li>Zero Flag - Indicates if the result is zero</li>
+        <li>Carry Flag - Indicates overflow in addition or borrow in subtraction</li>
+      </ol>
+      
+      <p>
+        We attempted to use the simulation feature that Vivado offers, but after constantly getting implementation errors, we decided not to use it for testing. Instead we used the same testing method that we did for the Register File, where we used the FPGA's on-board switches and LEDs.
+      </p>
+      
+      <p>
+        In Vivado, we learned a few essential things to keep in mind when making future modules.
+      </p>
+      <ul>
+        <li>Make sure the constraints file is set up properly, otherwise stuff ends up bad.</li>
+        <li>Button debouncing is essential for ensure that they work effectively</li>
+      </ul>
+      
+      <p>
+        Learning about ALU's and how they work was really fun on its own. We used a crash course video to gain a proper understanding of what ALU's do and how they work, and made a simplified version of what they showed in the video. 
+      </p>
+      
+      <p>
+        Understanding the ALU has enabled us to develop an appreciation for technology that we've never had before.
+      </p>
+    </div>
+    
+    <div class="entry">
       <div class="date">June 13, 2025</div>
       <h2>Project 1: Register File</h2>
       <p>
