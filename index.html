@@ -64,6 +64,165 @@
   </header>
 
   <div class="container">
+    
+    <div class="entry">
+      <div class="date">August 12, 2025</div>
+      <h2>Completion</h2>
+      <p>
+        So, what can this CPU actually do? So far we’ve only talked about the development of the CPU itself, but not much of what it could/would be used for. A CPU isn't built just to exist; it's built to do something.
+      </p>
+
+      <p>
+        Now, let's be real, you won't be playing the latest AAA game on this, because obviously our CPU doesn’t come close to that level. After all, you can’t expect two brothers to match the level of Intel or AMD chips using an FPGA board in their bedroom. But our CPU isn’t entirely useless either:
+      </p>
+
+      <ul>
+        <li>For starters, it can run any algorithm. In theory, our CPU is turing-complete, which means that given enough time and memory, it can compute anything that is computable by any other computer, from a supercomputer to a modern desktop CPU.</li>
+        <li>It can also execute complex programs. Any application, from a calculator to a game like Tic-Tac-Toe or Pong, can be broken down into a very long series of the simple instructions (ADD, SUB, LOAD, STORE, JUMP) that our CPU can understand</li>
+        <li>Its Memory-Mapped I/O capability means it can potentially control any peripheral you connect to it (like screens, sensors, motors, keyboards) by reading from and writing to specific addresses.</li>
+      </ul>
+
+      <p>
+        Sure, we've built what amounts to a powerful microcontroller from the 1970s. But it's a crucial first step on the path to our next ambitious projects. This is where revolutions begin. Everyone starts somewhere, and we're proud to have begun.
+      </p>
+    </div>
+
+    <div class="entry">
+      <div class="date">August 6, 2025</div>
+      <h2>Bringing it all together</h2>
+      <p>
+        We have officially created all of the modules necessary for creating a finished 8-bit CPU! For the final assembly, we created a Top-Level Module which is the schematic that wires every single component together. This module has no logic itself; its purpose is to connect the outputs of one module to the inputs of another, according to the CPU design we've planned from the start. This module also defines the connections externally (stuff on-board of the FPGA): the physical clock, reset button, and LEDs.
+      </p>
+      <p>
+        The top-level module is a series of wire declarations and module instantiations. It's the Verilog equivalent of taking all our built chips and soldering them together onto a final motherboard.
+      </p>
+      <p>
+        Here’s what our Top-Level Module Verilog file looks like in Vivado:
+      </p>
+      <img src="images/topmoduleverilogfile.png" alt="">
+      <p>
+        Here is how our files are organized in our directory (the basys3_top.v file you see handles physical connections and timing which we separated from the top-module file):
+      </p>
+      <img src="images/directory.png" alt="">
+      <p>
+        We managed to Generate Bitstream with no synthesis or implementation errors. What a great life we are living!
+      </p>
+    </div>
+
+    <div class="entry">
+      <div class="date">August 1, 2025</div>
+      <h2>Project 7: Data Memory & Memory-Mapped I/O</h2>
+      <p>
+        We could’ve finished earlier but we got a little preoccupied, but we finally finished the Data Memory (RAM), which is different from the instruction memory (ROM). More importantly, we use a trick called Memory-Mapped I/O to let the CPU communicate with the outside world.
+      </p>
+      <p>
+        The RAM module looks similar to the ROM but has a critical difference: it can be written to. It has mem_read and mem_write control signals.
+      </p>
+      <p>
+        The magic of Memory-Mapped I/O happens by reserving a special memory address. In our design, we decided that any write to address 8'h80 (128) doesn't go to normal RAM. Instead, it is routed to the LED outputs on the FPGA board. The CPU doesn't need special "output" instructions; it just does a STORE to address 128, and the hardware takes care of the rest.
+      </p>
+      <p>
+        We learned that the memory-mapped I/O is a powerful concept that abstracts hardware behind simple memory accesses. It showed us how the CPU can control anything (LEDs, VGA, speakers) by simply reading and writing to specific, special addresses. We implemented this because it replicates how real computers work.
+      </p>
+    </div>
+
+    <div class="entry">
+      <div class="date">July 23, 2025</div>
+      <h2>Project 6: The Control Unit</h2>
+      <p>
+        We finally finished the Control Unit! While we are still a week behind on schedule, I really like the pace that we are maintaining after the long delay before finishing the MUX.
+      </p>
+      <p>
+        This is essentially the brain of the entire CPU. Basically, what it does is it takes the current instruction and tells all the other components (ALU, registers, memory) what to do and when to do it by setting the control signals. It's a Finite State Machine (FSM) that directs the flow of every single operation.
+      </p>
+      <p>
+        The Control Unit works by looking at the opcode (operation code + in this sense, the first part of the instruction) and decodes it. Based on what it sees, it pulses the correct control wires high or low. Here some examples in our code:
+      </p>
+      <ul>
+        <li>Is this an ADD? Then set reg_write=1, alu_op=ADD, alu_src=REG.</li>
+        <li>Is this a STORE? Then set mem_write=1.</li>
+        <li>Is this a JUMP? Check the flags and set pc_load=1.</li>
+      </ul>
+      <p>
+        By researching and making the Control Unit, we learned that this module is where the Instruction Set Architecture (ISA) is defined in hardware. The opcodes we choose here must match what we program in our ROM. It also uses the common concept of the fetch-decode-execute cycle which is pretty neat!
+      </p>
+    </div>
+
+    <div class="entry">
+      <div class="date">July 20, 2025</div>
+      <h2>Project 5: Instruction Memory</h2>
+      <p>
+        Thankfully we managed to finish this before Baba sent us to sleep.
+      </p>
+      <p>
+        Here’s how Deepseek explained the Instruction Memory (ROM) to us:
+      </p>
+      <img src="images/imdeepseek.png" alt="">
+      <p>
+        The code for it is relatively simple. The main thing that we we needed was a $readmemh("C:/Users/ayanr/8_bit_cpu/8_bit_cpu.srcs/constrs_1/new/<b>rom_init.mem</b>", memory); in initial begin of the module.
+      </p>
+    </div>
+
+    <div class="entry">
+      <div class="date">July 18, 2025</div>
+      <h2>Project 4: The Program Counter</h2>
+      <p>
+        Yesterday was Ayan’s birthday! Yay! And we just finished the Program Counter.
+      </p>
+      <p>
+        The Program Counter (PC) is a special register with one simple job: hold the memory address of the next instruction to be executed. It points to the next step to be initiated. Without it, the CPU would have no idea where to find the next command in memory, and your program would be utterly lost.
+      </p>
+      <p>
+        Our PC does 3 things:
+      </p>
+      <ol>
+        <li>Reset: When the reset button is pressed, it goes back to the beginning (address 0).</li>
+        <li>Increment: By default, it just moves to the next step (PC = PC + 1), executing instructions in sequence.</li>
+        <li>Jump: If the instruction is a "JUMP", the instruction can immediately be a different address rather than the next one.</li>
+      </ol>
+      <p>
+        <b>Small mistake we made when making the PC:</b><br>
+        The jump instruction has higher priority than the increment instruction, so in our conditionals, we initially had the increment one be in an if statement above our jump one, making the increment have higher priority. Deepseek was NOT pleased with that and told us to fix it. It was a small and silly error which I have no idea how we made.
+      </p>
+    </div>
+
+    <div class="entry">
+      <div class="date">July 15, 2025</div>
+      <h2>Project 3: Multiplexers</h2>
+      <p>
+        The MUXes are finally done!  Multiplexers, while simple, are vital components that select one of several input signals to pass to a single output. They are the glue that allows different parts of the CPU to share the same data paths without chaos, all under the instructions of the Control Unit, which we have not yet made.
+      </p>
+
+      <p>
+        <b>How do they work?</b><br>
+        A multiplexer has N data inputs, a select signal (which tells it which input to choose), and one output. Our CPU uses several key multiplexers:
+        <ul>
+          <li>ALU Src MUX: Chooses whether the ALU's second operand comes from a register or an immediate value from the instruction.</li>
+          <li>Reg Data MUX: Chooses what gets written back to a register: an ALU result, data from RAM, or a PC value (for jumps).</li>
+          <li>Mem Addr MUX: Chooses whether the memory address is from the PC (to fetch an instruction) or from the ALU (to load/store data).</li>
+        </ul>
+      </p>
+
+      <p>
+        The neat part about multiplexers is that we don’t need to make a distinct one for the ALR Src, Reg Data, or Mem Addr. We only need to make two different multiplexers: one that’s a 4-to-1 MUX (4 inputs, 1 output) and a 2-to-1 MUX (2 inputs, 1 output).
+      </p>
+
+      <p>
+        Since we don’t have all the modules needed to test the code we made for the MUXs, we are just praying that our code is right for when we do combine our components together.
+      </p>
+    </div>
+
+    <div class="entry">
+      <div class="date">July 10, 2025</div>
+      <h2>Reason for delay</h2>
+      <p>
+        Today is Ehan’s birthday! Hooray!
+      </p>
+
+      <p>
+        Since Ehan has been super busy with summer classes, Ayan has sort of been working on the next module on his own and started losing motivation to keep working without Ehan’s help. Since we are really behind on our schedule, we need to lock in immediately.
+      </p>
+    </div>
 
     <div class="entry">
       <div class="date">June 30, 2025</div>
